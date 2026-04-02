@@ -1,11 +1,21 @@
--- 1. Bảng Destination
+CREATE DATABASE MetroTicketDB;
+GO
+
+USE MetroTicketDB;
+GO
+
+-- ============================================
+-- 1. Bảng Destination (Các ga đến từ Bến Thành)
+-- ============================================
 CREATE TABLE Destination (
     DestinationID INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
     FareAmount DECIMAL(18, 2) NOT NULL CHECK (FareAmount >= 0)
 );
 
--- 2. Bảng TicketVendorMachine
+-- ============================================
+-- 2. Bảng TicketVendorMachine (Các máy tại ga Bến Thành)
+-- ============================================
 CREATE TABLE TicketVendorMachine (
     MachineID INT IDENTITY(1,1) PRIMARY KEY,
     Location NVARCHAR(255) NOT NULL,
@@ -13,7 +23,9 @@ CREATE TABLE TicketVendorMachine (
         CHECK (Status IN ('Active', 'Maintenance', 'Offline'))
 );
 
+-- ============================================
 -- 3. Bảng Ticket
+-- ============================================
 CREATE TABLE Ticket (
     TicketID INT IDENTITY(1,1) PRIMARY KEY,
     IssueDate DATETIME DEFAULT GETDATE(),
@@ -23,11 +35,12 @@ CREATE TABLE Ticket (
     MachineID INT FOREIGN KEY REFERENCES TicketVendorMachine(MachineID)
 );
 
--- Tạo Index tăng tốc truy vấn cho vé
 CREATE NONCLUSTERED INDEX IX_Ticket_MachineID ON Ticket(MachineID);
 CREATE NONCLUSTERED INDEX IX_Ticket_IssueDate ON Ticket(IssueDate);
 
+-- ============================================
 -- 4. Bảng Payment
+-- ============================================
 CREATE TABLE Payment (
     PaymentID INT IDENTITY(1,1) PRIMARY KEY,
     TicketID INT FOREIGN KEY REFERENCES Ticket(TicketID),
@@ -40,5 +53,25 @@ CREATE TABLE Payment (
     ProviderRef VARCHAR(100)
 );
 
--- Tạo Index bảo vệ tính duy nhất (1 vé chỉ có 1 giao dịch thanh toán thành công)
 CREATE UNIQUE NONCLUSTERED INDEX IX_Payment_TicketID ON Payment(TicketID);
+
+-- ============================================
+-- NHẬP DỮ LIỆU GỐC (MASTER DATA) 
+-- ============================================
+
+-- 1. Thêm các máy bán vé đặt tại ga Bến Thành
+INSERT INTO TicketVendorMachine (Location, Status) VALUES 
+(N'Ben Thanh Station - Gate A', 'Active'),
+(N'Ben Thanh Station - Gate B', 'Active'),
+(N'Ben Thanh Station - Center Mall', 'Active');
+
+-- 2. Thêm 8 ga đến xuất phát từ Bến Thành
+INSERT INTO Destination (Name, FareAmount) VALUES 
+(N'Ben Thanh -> Opera House', 15000.00),
+(N'Ben Thanh -> Ba Son', 15000.00),
+(N'Ben Thanh -> Van Thanh Park', 17000.00),
+(N'Ben Thanh -> Thao Dien', 19000.00),
+(N'Ben Thanh -> An Phu', 19000.00),
+(N'Ben Thanh -> Rach Chiec', 21000.00),
+(N'Ben Thanh -> Hi-Tech Park', 23000.00),
+(N'Ben Thanh -> Suoi Tien', 25000.00);
