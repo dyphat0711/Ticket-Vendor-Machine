@@ -1,9 +1,3 @@
-CREATE DATABASE MetroTicketDB;
-GO
-
-USE MetroTicketDB;
-GO
-
 -- ============================================
 -- 1. Bảng Destination (Các ga đến từ Bến Thành)
 -- ============================================
