@@ -1,5 +1,5 @@
 -- ============================================
--- 1. Bảng Destination (Các ga đến từ Bến Thành)
+-- 1. Destination Table
 -- ============================================
 CREATE TABLE Destination (
     DestinationID INT IDENTITY(1,1) PRIMARY KEY,
@@ -8,7 +8,7 @@ CREATE TABLE Destination (
 );
 
 -- ============================================
--- 2. Bảng TicketVendorMachine (Các máy tại ga Bến Thành)
+-- 2. TicketVendorMachine Table
 -- ============================================
 CREATE TABLE TicketVendorMachine (
     MachineID INT IDENTITY(1,1) PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE TicketVendorMachine (
 );
 
 -- ============================================
--- 3. Bảng Ticket
+-- 3. Ticket Table
 -- ============================================
 CREATE TABLE Ticket (
     TicketID INT IDENTITY(1,1) PRIMARY KEY,
@@ -33,7 +33,7 @@ CREATE NONCLUSTERED INDEX IX_Ticket_MachineID ON Ticket(MachineID);
 CREATE NONCLUSTERED INDEX IX_Ticket_IssueDate ON Ticket(IssueDate);
 
 -- ============================================
--- 4. Bảng Payment
+-- 4. Payment Table
 -- ============================================
 CREATE TABLE Payment (
     PaymentID INT IDENTITY(1,1) PRIMARY KEY,
@@ -50,16 +50,16 @@ CREATE TABLE Payment (
 CREATE UNIQUE NONCLUSTERED INDEX IX_Payment_TicketID ON Payment(TicketID);
 
 -- ============================================
--- NHẬP DỮ LIỆU GỐC (MASTER DATA) 
+-- MASTER DATA
 -- ============================================
 
--- 1. Thêm các máy bán vé đặt tại ga Bến Thành
+-- 1. Add ticket vending machines located at Ben Thanh Station
 INSERT INTO TicketVendorMachine (Location, Status) VALUES 
 (N'Ben Thanh Station - Gate A', 'Active'),
 (N'Ben Thanh Station - Gate B', 'Active'),
 (N'Ben Thanh Station - Center Mall', 'Active');
 
--- 2. Thêm 8 ga đến xuất phát từ Bến Thành
+-- 2. Add 8 destinations departing from Ben Thanh
 INSERT INTO Destination (Name, FareAmount) VALUES 
 (N'Ben Thanh -> Opera House', 15000.00),
 (N'Ben Thanh -> Ba Son', 15000.00),
