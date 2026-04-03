@@ -29,5 +29,6 @@ namespace BenThanhMetro.Models
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TicketVendorMachine> TicketVendorMachines { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

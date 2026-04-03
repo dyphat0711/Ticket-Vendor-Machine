@@ -12,6 +12,7 @@
         <AssociationConnector Association="MetroTicketDBModel.FK__Ticket__Destinat__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="MetroTicketDBModel.FK__Payment__TicketI__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="MetroTicketDBModel.FK__Ticket__MachineI__534D60F1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MetroTicketDBModel.tblUser" Width="1.5" PointX="4.625" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

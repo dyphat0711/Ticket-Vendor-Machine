@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null; // Không dùng layout chung để giấu thanh Menu
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Login - Ben Thanh Metro</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card text-center">
+        <h2 style="color: #003366; font-weight: bold; margin-bottom: 20px;">
+            <i class="fa fa-lock"></i> SYSTEM LOGIN
+        </h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        <form action="/Admin/Login" method="post">
+            <div class="form-group mb-3 text-start">
+                <label class="fw-bold">Tên đăng nhập</label>
+                <input type="text" name="username" class="form-control" placeholder="Nhập 'admin'" required />
+            </div>
+            <div class="form-group mb-4 text-start">
+                <label class="fw-bold">Mật khẩu</label>
+                <input type="password" name="password" class="form-control" placeholder="Nhập '123456'" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #003366; padding: 12px; font-weight: bold;">ĐĂNG NHẬP</button>
+        </form>
+
+        <div class="mt-4">
+            <a href="/Tickets/Index" class="text-muted"><i class="fa fa-arrow-left"></i> Quay lại Kiosk bán vé</a>
+        </div>
+    </div>
+</body>
+</html>

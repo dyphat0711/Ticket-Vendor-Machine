@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Thanh toán Thẻ";
+    decimal price = Convert.ToDecimal(TempData.Peek("Price"));
+}
+
+<div class="container text-center" style="margin-top: 50px;">
+    <h2 style="color: #003366; font-weight: bold;">HƯỚNG DẪN THANH TOÁN THẺ</h2>
+    <h4 class="text-success mb-5">Số tiền cần thanh toán: @String.Format("{0:N0}", price) VND</h4>
+
+    <div class="row justify-content-center gap-4">
+        <div class="col-md-5">
+            <form action="/Tickets/Processing" method="post">
+                <input type="hidden" name="method" value="CreditCard" />
+                <button type="submit" class="btn btn-light w-100 p-5 shadow-sm" style="border: 2px solid #28a745; border-radius: 15px;">
+                    <i class="fa fa-wifi" style="font-size: 80px; color: #28a745; transform: rotate(90deg); margin-bottom: 20px;"></i>
+                    <h2 style="color: #28a745; font-weight: bold;">1 CHẠM (NFC)</h2>
+                    <p class="text-muted">Chạm thẻ vào đầu đọc bên dưới màn hình</p>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-5">
+            <form action="/Tickets/Processing" method="post">
+                <input type="hidden" name="method" value="CreditCard" />
+                <button type="submit" class="btn btn-light w-100 p-5 shadow-sm" style="border: 2px solid #003366; border-radius: 15px;">
+                    <i class="fa fa-credit-card-alt" style="font-size: 80px; color: #003366; margin-bottom: 20px;"></i>
+                    <h2 style="color: #003366; font-weight: bold;">ĐÚT THẺ (INSERT)</h2>
+                    <p class="text-muted">Đút thẻ vào khe cắm bên phải màn hình</p>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a href="/Tickets/Index" class="btn btn-outline-danger btn-lg rounded-pill px-5">Hủy Giao Dịch</a>
+    </div>
+</div>

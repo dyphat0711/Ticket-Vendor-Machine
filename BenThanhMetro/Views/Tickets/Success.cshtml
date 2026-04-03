@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Thanh toán thành công";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
+
+<div class="container text-center" style="margin-top: 50px;">
+
+    <i class="fa fa-check-circle" style="font-size: 100px; color: #28a745;"></i>
+    <h1 style="color: #28a745; font-weight: bold; margin-top: 20px;">GIAO DỊCH THÀNH CÔNG!</h1>
+    <p class="text-muted" style="font-size: 1.2rem;">Vui lòng lấy vé ở khe bên dưới.</p>
+
+    <div class="card mx-auto shadow mt-5" style="max-width: 450px; border: 3px dashed #003366; border-radius: 15px; background-color: #fffaf0;">
+        <div class="card-body p-4">
+            <h3 style="color: #003366; font-weight: bold; text-transform: uppercase;">
+                <i class="fa fa-subway"></i> Ben Thanh Metro
+            </h3>
+            <p class="text-muted mb-4">Vé tàu điện ngầm 1 chiều</p>
+
+            <hr style="border-top: 2px dashed #ccc;" />
+
+            <div style="margin: 20px 0;">
+                <div style="font-family: 'Libre Barcode 39', cursive; font-size: 70px; line-height: 1; color: #000;">
+                    *@ViewBag.Barcode*
+                </div>
+                <h4 style="font-family: 'Courier New', Courier, monospace; font-weight: bold; letter-spacing: 3px; margin-top: 10px;">
+                    @ViewBag.Barcode
+                </h4>
+            </div>
+
+            <hr style="border-top: 2px dashed #ccc;" />
+
+            <h5 class="text-danger mt-3" style="font-weight: bold;">
+                <i class="fa fa-clock-o"></i> Có giá trị sử dụng đến:<br />
+                @ViewBag.ValidUntil
+            </h5>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a href="/Tickets/Index" class="btn btn-primary btn-lg rounded-pill shadow" style="background-color: #003366; padding: 15px 50px; font-size: 20px; font-weight: bold;">
+            Hoàn Tất / Quay Lại
+        </a>
+    </div>
+</div>

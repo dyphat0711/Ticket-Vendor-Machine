@@ -1,0 +1,66 @@
+﻿@model BenThanhMetro.Models.Payment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ticket.BarcodeData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticket.BarcodeData)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PaymentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

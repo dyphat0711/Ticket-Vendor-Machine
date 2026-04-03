@@ -1,39 +1,104 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title - Metro Bến Thành</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .bg-metro {
+            background-color: #003366 !important;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255,255,255,.8);
+            font-weight: 500;
+        }
+
+            .navbar-dark .navbar-nav .nav-link:hover {
+                color: #fff;
+            }
+
+        /* Hiệu ứng cho các nút bấm cảm ứng */
+        .btn:active {
+            transform: scale(0.98);
+            filter: brightness(0.9);
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
+<body oncontextmenu="return false;">
+
+    @if (Session["Role"] != null && Session["Role"].ToString() == "Admin")
+    {
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-metro shadow-sm">
+            <div class="container">
+                @Html.ActionLink("🚆 Quản Trị Metro", "Index", "Tickets", new { area = "" }, new { @class = "navbar-brand fw-bold" })
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Màn hình Kiosk", "Index", "Tickets", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Tuyến Đường", "Index", "Destinations", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Thiết Bị", "Index", "TicketVendorMachines", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Báo Cáo", "Index", "Payments", new { area = "" }, new { @class = "nav-link text-warning fw-bold" })</li>
+                        <li><a href="/Admin/Logout" class="nav-link text-danger"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+    }
+    else
+    {
+        <div class="bg-metro" style="height: 5px; width: 100%;"></div>
+        <div class="container text-end py-2">
+            <a href="/Admin/Login" class="text-muted small" style="text-decoration:none;"><i class="fa fa-lock"></i> Nhân viên</a>
         </div>
-    </nav>
+    }
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+        @if (Session["Role"] != null)
+        {
+            <hr />
+            <footer>
+                <p class="text-center text-muted">&copy; @DateTime.Now.Year - Hệ thống Quản lý Metro Bến Thành</p>
+            </footer>
+        }
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        var isAdmin = '@(Session["Role"] != null ? "true" : "false")';
+        var isHomePage = window.location.pathname === "/Tickets/Index" || window.location.pathname === "/Tickets" || window.location.pathname === "/";
+
+        if (isAdmin === "false" && !isHomePage) {
+            let idleTime = 0;
+            document.addEventListener('click', () => idleTime = 0);
+            document.addEventListener('touchstart', () => idleTime = 0);
+
+            setInterval(() => {
+                idleTime++;
+                if (idleTime >= 60) {
+                    window.location.href = '/Tickets/Index';
+                }
+            }, 1000);
+        }
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

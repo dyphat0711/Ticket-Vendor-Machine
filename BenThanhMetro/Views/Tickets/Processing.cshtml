@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Đang xử lý giao dịch";
+    string method = TempData.Peek("Method") as string;
+}
+
+<div class="container text-center" style="margin-top: 150px;">
+
+    <div class="spinner-border text-success" role="status" style="width: 5rem; height: 5rem; border-width: 8px;">
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <h2 style="color: #003366; font-weight: bold; margin-top: 30px;">ĐANG XỬ LÝ GIAO DỊCH...</h2>
+    <p class="text-muted" style="font-size: 1.2rem;">Vui lòng không lấy thẻ ra hoặc làm mới trang</p>
+
+    <form id="autoSubmitForm" action="/Tickets/ProcessPayment" method="post">
+        <input type="hidden" name="method" value="@method" />
+    </form>
+</div>
+
+<script>
+    setTimeout(function () {
+        // Sau 2500ms (2.5 giây), hệ thống dùng Javascript tự động bấm nút Submit cái form ẩn ở trên
+        document.getElementById("autoSubmitForm").submit();
+    }, 2500);
+</script>

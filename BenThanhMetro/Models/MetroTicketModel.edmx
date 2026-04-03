@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MetroTicketDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MetroTicketDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Destination">
           <Key>
             <PropertyRef Name="DestinationID" />
@@ -25,6 +25,15 @@
           <Property Name="TransactionStatus" Type="varchar" MaxLength="50" />
           <Property Name="ProviderRef" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="TicketID" />
@@ -44,7 +53,7 @@
           <Property Name="Location" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Payment__TicketI__5629CD9C">
+        <Association Name="FK__Payment__TicketI__4316F928">
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,7 +65,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ticket__Destinat__52593CB8">
+        <Association Name="FK__Ticket__Destinat__3F466844">
           <End Role="Destination" Type="Self.Destination" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -68,7 +77,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ticket__MachineI__534D60F1">
+        <Association Name="FK__Ticket__MachineI__403A8C7D">
           <End Role="TicketVendorMachine" Type="Self.TicketVendorMachine" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -83,23 +92,23 @@
         <EntityContainer Name="MetroTicketDBModelStoreContainer">
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketVendorMachine" EntityType="Self.TicketVendorMachine" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Payment__TicketI__5629CD9C" Association="Self.FK__Payment__TicketI__5629CD9C">
+          <AssociationSet Name="FK__Payment__TicketI__4316F928" Association="Self.FK__Payment__TicketI__4316F928">
             <End Role="Ticket" EntitySet="Ticket" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ticket__Destinat__52593CB8" Association="Self.FK__Ticket__Destinat__52593CB8">
+          <AssociationSet Name="FK__Ticket__Destinat__3F466844" Association="Self.FK__Ticket__Destinat__3F466844">
             <End Role="Destination" EntitySet="Destination" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ticket__MachineI__534D60F1" Association="Self.FK__Ticket__MachineI__534D60F1">
+          <AssociationSet Name="FK__Ticket__MachineI__403A8C7D" Association="Self.FK__Ticket__MachineI__403A8C7D">
             <End Role="TicketVendorMachine" EntitySet="TicketVendorMachine" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MetroTicketDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -201,7 +210,17 @@
             <End Role="TicketVendorMachine" EntitySet="TicketVendorMachines" />
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
+          <EntitySet Name="tblUsers" EntityType="MetroTicketDBModel.tblUser" />
         </EntityContainer>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -248,6 +267,16 @@
                 <ScalarProperty Name="MachineID" ColumnName="MachineID" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="MetroTicketDBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

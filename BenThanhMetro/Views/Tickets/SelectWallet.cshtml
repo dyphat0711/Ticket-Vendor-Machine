@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Chọn Ứng Dụng Thanh Toán";
+    decimal price = Convert.ToDecimal(TempData.Peek("Price"));
+}
+
+<div class="container text-center" style="margin-top: 50px;">
+    <h2 style="color: #003366; font-weight: bold; margin-bottom: 10px;">CHỌN ỨNG DỤNG QUÉT MÃ</h2>
+    <h4 class="text-success mb-5">Số tiền cần thanh toán: @String.Format("{0:N0}", price) VND</h4>
+
+    <div class="row justify-content-center mt-5 gap-4">
+
+        <div class="col-md-3">
+            <form action="/Tickets/QRPayment" method="post">
+                <input type="hidden" name="walletType" value="Momo" />
+                <button type="submit" class="btn btn-light w-100 p-4 shadow-sm wallet-card" style="border: 2px solid #a50064; border-radius: 15px;">
+                    <div style="background-color: #a50064; color: white; border-radius: 10px; width: 80px; height: 80px; line-height: 80px; font-size: 40px; margin: 0 auto 15px auto;">
+                        <i class="fa fa-qrcode"></i>
+                    </div>
+                    <h3 style="color: #a50064; font-weight: bold;">MoMo</h3>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <form action="/Tickets/QRPayment" method="post">
+                <input type="hidden" name="walletType" value="VNPay" />
+                <button type="submit" class="btn btn-light w-100 p-4 shadow-sm wallet-card" style="border: 2px solid #005baa; border-radius: 15px;">
+                    <div style="background-color: #005baa; color: white; border-radius: 10px; width: 80px; height: 80px; line-height: 80px; font-size: 40px; margin: 0 auto 15px auto;">
+                        <i class="fa fa-mobile-phone"></i>
+                    </div>
+                    <h3 style="color: #005baa; font-weight: bold;">VNPay</h3>
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <form action="/Tickets/QRPayment" method="post">
+                <input type="hidden" name="walletType" value="ZaloPay" />
+                <button type="submit" class="btn btn-light w-100 p-4 shadow-sm wallet-card" style="border: 2px solid #0088cc; border-radius: 15px;">
+                    <div style="background-color: #0088cc; color: white; border-radius: 10px; width: 80px; height: 80px; line-height: 80px; font-size: 40px; margin: 0 auto 15px auto;">
+                        <i class="fa fa-commenting"></i>
+                    </div>
+                    <h3 style="color: #0088cc; font-weight: bold;">ZaloPay</h3>
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="mt-5">
+        <button onclick="window.history.back();" class="btn btn-outline-primary btn-lg rounded-pill px-4">
+            <i class="fa fa-arrow-left"></i> Quay lại
+        </button>
+        <a href="/Tickets/Index" class="btn btn-outline-secondary btn-lg rounded-pill px-5 mt-4">
+            <i class="fa fa-arrow-left"></i> Hủy bỏ giao dịch
+        </a>
+    </div>
+</div>
+
+<style>
+    .wallet-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        background-color: #fff;
+    }
+
+        .wallet-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+        }
+</style>
