@@ -1,3 +1,11 @@
+USE MASTER
+GO
+
+CREATE DATABASE MetroTicketDB
+GO
+
+USE MetroTicketDB
+GO
 -- ============================================
 -- 1. Destination Table
 -- ============================================
